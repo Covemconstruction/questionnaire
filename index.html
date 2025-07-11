@@ -5,75 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Questionnaire de Qualification COVEM</title>
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Librairie html2pdf pour export PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
   <div class="container">
     <h1>Questionnaire de Qualification Approfondie – Covem Construction</h1>
 
-    <!-- Informations Générales -->
     <div class="section-header">
       <h2>Informations Générales du Projet</h2>
     </div>
     <form id="projectInfoForm">
-      <div class="form-group">
-        <label for="projectName">NOM DU PROJET :</label>
-        <input type="text" id="projectName" name="projectName" required />
-      </div>
-      <div class="form-group">
-        <label for="clientName">Nom client :</label>
-        <input type="text" id="clientName" name="clientName" required />
-      </div>
-      <div class="form-group">
-        <label for="clientAddress">Adresse :</label>
-        <input type="text" id="clientAddress" name="clientAddress" />
-      </div>
-      <div class="form-group">
-        <label for="clientTel">Tél. :</label>
-        <input type="tel" id="clientTel" name="clientTel" />
-      </div>
-      <div class="form-group">
-        <label for="clientEmail">Courriel:</label>
-        <input type="email" id="clientEmail" name="clientEmail" />
-      </div>
+      <div class="form-group"><label for="projectName">NOM DU PROJET :</label><input type="text" id="projectName" name="projectName" required /></div>
+      <div class="form-group"><label for="clientName">Nom client :</label><input type="text" id="clientName" name="clientName" required /></div>
+      <div class="form-group"><label for="clientAddress">Adresse :</label><input type="text" id="clientAddress" name="clientAddress" /></div>
+      <div class="form-group"><label for="clientTel">Tél. :</label><input type="tel" id="clientTel" name="clientTel" /></div>
+      <div class="form-group"><label for="clientEmail">Courriel:</label><input type="email" id="clientEmail" name="clientEmail" /></div>
       <button type="button" onclick="saveProjectInfo()">Enregistrer Informations Générales</button>
     </form>
 
     <hr />
 
-    <!-- Sélection des sections -->
     <div class="section-header">
       <h2>2e ÉTAPE 📋 Sélectionner les sections à remplir</h2>
       <p>Cochez une ou plusieurs sections pour afficher les questions correspondantes :</p>
     </div>
 
     <div id="sectionCheckboxes" class="form-group checkbox-group"></div>
-
-    <!-- Zone pour les questions dynamiques -->
     <div id="questionsContainer" class="questions-container"></div>
 
-    <!-- Bouton de sauvegarde -->
     <button type="button" id="saveAllSections" style="display: none;">💾 Enregistrer toutes les sections</button>
-
-    <!-- Résumé -->
     <button type="button" id="showSummary" style="display: none;">📄 Afficher le résumé</button>
 
-    <!-- Boutons PDF -->
     <div class="pdf-actions" style="display: none; margin-top: 20px;">
       <button type="button" id="generatePdfButton">⬇️ Télécharger en PDF</button>
       <button type="button" id="printPdfButton">🖨️ Imprimer</button>
     </div>
 
-    <!-- Résumé final -->
     <div id="summaryContainer" class="summary-container" style="display: none;">
       <h2>Résumé du Questionnaire</h2>
       <pre id="summaryContent"></pre>
     </div>
   </div>
-
-  <!-- Script principal -->
   <script src="script.js"></script>
 </body>
 </html>
