@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Questionnaire de Qualification COVEM</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Questionnaire de Qualification Approfondie – Covem Construction</h1>
+
+    <div class="section-header">
+      <h2>Informations Générales du Projet</h2>
+    </div>
+    <form id="projectInfoForm">
+      <div class="form-group">
+        <label for="projectName">NOM DU PROJET :</label>
+        <input type="text" id="projectName" name="projectName" required />
+      </div>
+      <div class="form-group">
+        <label for="clientName">Nom client :</label>
+        <input type="text" id="clientName" name="clientName" required />
+      </div>
+      <div class="form-group">
+        <label for="clientAddress">Adresse :</label>
+        <input type="text" id="clientAddress" name="clientAddress" />
+      </div>
+      <div class="form-group">
+        <label for="clientTel">Tél. :</label>
+        <input type="tel" id="clientTel" name="clientTel" />
+      </div>
+      <div class="form-group">
+        <label for="clientEmail">Courriel:</label>
+        <input type="email" id="clientEmail" name="clientEmail" />
+      </div>
+      <button type="button" onclick="saveProjectInfo()">Enregistrer Informations Générales</button>
+    </form>
+
+    <hr />
+
+    <div class="section-header">
+      <h2>2e ÉTAPE 📋 Questionnaire de Qualification Approfondie</h2>
+      <p>Sélectionnez une section pour afficher les questions correspondantes.</p>
+      <label for="sectionSelect">Sélectionner une section :</label>
+      <select id="sectionSelect" name="section">
+        <option value="">-- Choisir une section --</option>
+        <option value="contexteGeneral">1. Contexte général du projet</option>
+        <option value="plansDocuments">2. Plans et documents fournis</option>
+        <option value="fraisGeneraux">Frais Généraux</option>
+        <option value="excavation">Excavation</option>
+        <option value="demolition">Démolition</option>
+        <option value="beton">Béton</option>
+        <option value="pieuxVisses">Pieux Vissés</option>
+        <option value="maconnerie">Maçonnerie</option>
+        <option value="acierMetaux">Acier Métaux Ouvrés</option>
+        <option value="charpenteStructure">Charpente – Structure & Rénovation Intérieure</option>
+        <option value="menuiserieBoiserie">Menuiserie et Boiserie</option>
+        <option value="ebenisterie">Ébénisterie</option>
+        <option value="escalier">Escalier</option>
+        <option value="balcon">Balcon</option>
+        <option value="isolation">Isolation</option>
+        <option value="toiturePente">Toiture Pente</option>
+        <option value="toiturePlat">Toiture Plat</option>
+        <option value="revetementExterieur">Revêtement Extérieur</option>
+        <option value="portesFenetres">Portes et Fenêtres</option>
+        <option value="vitrerie">Vitrerie</option>
+        <option value="systemeInterieur">Système Intérieur</option>
+        <option value="ceramique">Céramique</option>
+        <option value="revetementSol">Revêtement de Sol</option>
+        <option value="peintureEnduit">Peinture et Enduit</option>
+        <option value="aspirateurCentral">Aspirateur Central</option>
+        <option value="plomberie">Plomberie</option>
+        <option value="ventilation">Ventilation</option>
+        <option value="chauffageGaz">Chauffage et Gaz</option>
+        <option value="electricite">Électricité</option>
+      </select>
+    </div>
+
+    <div id="questionsContainer" class="questions-container"></div>
+
+    <button type="button" id="saveSection" style="display: none;">💾 Enregistrer les réponses de la section</button>
+    <button type="button" id="showSummary" style="display: none;">📄 Afficher le résumé complet</button>
+    <button type="button" id="printSummary" style="display: none;">🖨️ Imprimer le résumé</button>
+
+    <div id="summaryContainer" class="summary-container" style="display: none;">
+      <h2>Résumé du Questionnaire</h2>
+      <pre id="summaryContent"></pre>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const printSummaryButton = document.getElementById('printSummary');
+      const summaryContainer = document.getElementById('summaryContainer');
+
+      printSummaryButton.addEventListener('click', () => {
+        const originalContent = document.body.innerHTML;
+        const printContent = summaryContainer.innerHTML;
+
+        document.body.innerHTML = printContent;
+        window.print();
+        document.body.innerHTML = originalContent;
+        window.location.reload();
+      });
+    });
+  </script>
+</body>
+</html>
