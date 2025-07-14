@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const allAnswers = {};
 
   function generateSectionCheckboxes() {
-    for (const key in allQuestions) {
+    for (const key in allquestions) {
       const label = document.createElement('label');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       title.textContent = sectionLabels[section] || section;
       questionsContainer.appendChild(title);
 
-      allQuestions[section].forEach(q => {
+      allquestions[section].forEach(q => {
         const div = document.createElement('div');
         div.className = 'form-group';
         const label = document.createElement('label');
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedSections = Array.from(document.querySelectorAll('input[name="selectedSection"]:checked')).map(cb => cb.value);
     selectedSections.forEach(section => {
       allAnswers[section] = {};
-      allQuestions[section].forEach(q => {
+      allquestions[section].forEach(q => {
         const name = `${section}-${q.id}`;
         if (q.type === 'text' || q.type === 'textarea') {
           const input = document.querySelector(`[name="${name}"]`);
