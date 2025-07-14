@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', () => {
   const sectionCheckboxesContainer = document.getElementById('sectionCheckboxes');
   const questionsContainer = document.getElementById('questionsContainer');
@@ -105,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const questions = allQuestions[section];
         if (questions) {
           questions.forEach(q => {
-            const answer = allAnswers[section][q.id] || 'Pas de réponse';
+            const answer = allAnswers[section][q.id] || 'Non renseigné';
             summary += `- ${q.label}: ${answer}\n`;
           });
         }
@@ -117,37 +118,46 @@ document.addEventListener('DOMContentLoaded', () => {
     summaryContainer.style.display = 'block';
   }
 
- function generatePdf() {
-  // Clone le résumé dans un nouvel élément pour une capture propre
-  displaySummary();
+  function generatePdf() {
+    displaySummary();
 
-  const clone = summaryContainer.cloneNode(true);
-  clone.style.display = 'block'; // Assure que le résumé est visible
-  document.body.appendChild(clone); // Ajoute le clone au DOM temporairement
+    const clone = summaryContainer.cloneNode(true);
+    clone.style.display = 'block';
+    document.body.appendChild(clone);
 
-  const opt = {
-    margin: 1,
-    filename: `Questionnaire_COVEM.pdf`,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-  };
+    const opt = {
+      margin: 1,
+      filename: `Questionnaire_COVEM.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
 
-  html2pdf().set(opt).from(clone).save().then(() => {
-    document.body.removeChild(clone); // Nettoyage après génération
-  });
-}
+    html2pdf().set(opt).from(clone).save().then(() => {
+      document.body.removeChild(clone);
+    });
+  }
 
-function printPdf() {
-  displaySummary();
+  function printPdf() {
+    displaySummary();
 
-  const clone = summaryContainer.cloneNode(true);
-  clone.style.display = 'block';
-  document.body.appendChild(clone);
+    const clone = summaryContainer.cloneNode(true);
+    clone.style.display = 'block';
+    document.body.appendChild(clone);
 
-  const opt = {
-    margin: 1,
-    image: { type: 'jpeg', quality: 0.98 }
+    const opt = {
+      margin: 1,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+
+    html2pdf().set(opt).from(clone).output('bloburl').then(url => {
+      document.body.removeChild(clone);
+      const win = window.open(url);
+      win.onload = () => win.print();
+    });
+  }
 
   generateSectionCheckboxes();
 
