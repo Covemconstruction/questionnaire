@@ -118,17 +118,21 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function generatePdf() {
-    displaySummary();
+  displaySummary();
+  setTimeout(() => {
     html2pdf().from(summaryContainer).save();
-  }
+  }, 300); // Attend 300ms que le résumé soit bien visible
+}
 
   function printPdf() {
-    displaySummary();
+  displaySummary();
+  setTimeout(() => {
     html2pdf().from(summaryContainer).output('bloburl').then(url => {
       const win = window.open(url);
       win.onload = () => win.print();
     });
-  }
+  }, 300);
+}
 
   generateSectionCheckboxes();
 
