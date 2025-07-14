@@ -1,5 +1,35 @@
 // Section labels and questions
-const sectionLabels = {contexteGeneral: "1. Contexte général du projet", plansDocuments: "2. Plans et documents fournis", fraisGeneraux: "3. Frais Généraux", excavation: "4. Excavation", demolitio": "5. Démolition", beton: "6. Béton", pieuxVisses: "7. Pieux Vissés", maconnerie: "8. Maçonnerie", acierMetaux: "9. Acier Métaux Ouvrés", charpenteStructure: "10. Charpente – Structure & Rénovation Intérieure", menuiserieBoiserie: "11. Menuiserie et Boiserie", ebenisterie: "12. Ébénisterie", escalier: "13. Escalier", balcon: "14. Balcon", isolation: "15. Isolation", toiturePente: "16. Toiture Pente", toiturePlat: "17. Toiture Plat", revetementExterieur: "18. Revêtement Extérieur", portesFenetres: "19. Portes et Fenêtres", vitrerie: "20. Vitrerie", systemeInterieur: "21. Système Intérieur", ceramique: "22. Céramique", revetementSol: "23. Revêtement de Sol", peintureEnduit: "24. Peinture et Enduit", aspirateurCentral: "25. Aspirateur Central", plomberie: "26. Plomberie, ventilation: "27. Ventilation", chauffageGaz: "28. Chauffage et Gaz", electricite: "29. Électricité"};
+const sectionLabels = {
+  contexteGeneral: "1. Contexte général du projet",
+  plansDocuments: "2. Plans et documents fournis",
+  fraisGeneraux: "3. Frais Généraux",
+  excavation: "4. Excavation",
+  demolition: "5. Démolition",
+  beton: "6. Béton",
+  pieuxVisses: "7. Pieux Vissés",
+  maconnerie: "8. Maçonnerie",
+  acierMetaux: "9. Acier Métaux Ouvrés",
+  charpenteStructure: "10. Charpente – Structure & Rénovation Intérieure",
+  menuiserieBoiserie: "11. Menuiserie et Boiserie",
+  ebenisterie: "12. Ébénisterie",
+  escalier: "13. Escalier",
+  balcon: "14. Balcon",
+  isolation: "15. Isolation",
+  toiturePente: "16. Toiture Pente",
+  toiturePlat: "17. Toiture Plat",
+  revetementExterieur: "18. Revêtement Extérieur",
+  portesFenetres: "19. Portes et Fenêtres",
+  vitrerie: "20. Vitrerie",
+  systemeInterieur: "21. Système Intérieur",
+  ceramique: "22. Céramique",
+  revetementSol: "23. Revêtement de Sol",
+  peintureEnduit: "24. Peinture et Enduit",
+  aspirateurCentral: "25. Aspirateur Central",
+  plomberie: "26. Plomberie",
+  ventilation: "27. Ventilation",
+  chauffageGaz: "28. Chauffage et Gaz",
+  electricite: "29. Électricité"
+};
 
 const allquestions = {
 contexteGeneral: [
