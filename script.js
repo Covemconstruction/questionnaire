@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const section in allAnswers) {
       if (sectionLabels[section]) {
         summary += `📌 ${sectionLabels[section]}\n`;
-        const questions = allQuestions[section];
+        const questions = allquestions[section];
         if (questions) {
           questions.forEach(q => {
             const answer = allAnswers[section][q.id] || 'Non renseigné';
