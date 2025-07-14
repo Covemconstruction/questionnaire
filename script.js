@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const questions = allQuestions[section];
         if (questions) {
           questions.forEach(q => {
-            const answer = allAnswers[section][q.id] || 'Non renseigné';
+            const answer = allAnswers[section][q.id] || 'Pas de réponse';
             summary += `- ${q.label}: ${answer}\n`;
           });
         }
@@ -117,22 +117,37 @@ document.addEventListener('DOMContentLoaded', () => {
     summaryContainer.style.display = 'block';
   }
 
-  function generatePdf() {
+ function generatePdf() {
+  // Clone le résumé dans un nouvel élément pour une capture propre
   displaySummary();
-  setTimeout(() => {
-    html2pdf().from(summaryContainer).save();
-  }, 300); // Attend 300ms que le résumé soit bien visible
+
+  const clone = summaryContainer.cloneNode(true);
+  clone.style.display = 'block'; // Assure que le résumé est visible
+  document.body.appendChild(clone); // Ajoute le clone au DOM temporairement
+
+  const opt = {
+    margin: 1,
+    filename: `Questionnaire_COVEM.pdf`,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2 },
+    jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(clone).save().then(() => {
+    document.body.removeChild(clone); // Nettoyage après génération
+  });
 }
 
-  function printPdf() {
+function printPdf() {
   displaySummary();
-  setTimeout(() => {
-    html2pdf().from(summaryContainer).output('bloburl').then(url => {
-      const win = window.open(url);
-      win.onload = () => win.print();
-    });
-  }, 300);
-}
+
+  const clone = summaryContainer.cloneNode(true);
+  clone.style.display = 'block';
+  document.body.appendChild(clone);
+
+  const opt = {
+    margin: 1,
+    image: { type: 'jpeg', quality: 0.98 }
 
   generateSectionCheckboxes();
 
