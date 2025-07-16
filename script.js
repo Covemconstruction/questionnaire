@@ -13,6 +13,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const allAnswers = {};
 
   function generateSectionCheckboxes() {
+    const saved = localStorage.getItem('covemAnswers');
+if (saved) {
+  Object.assign(allAnswers, JSON.parse(saved));
+}
     for (const key in allquestions) {
       const label = document.createElement('label');
       const checkbox = document.createElement('input');
@@ -42,23 +46,28 @@ document.addEventListener('DOMContentLoaded', () => {
         label.textContent = q.label;
         div.appendChild(label);
 
-        if (q.type === 'text' || q.type === 'textarea') {
-          const input = q.type === 'text' ? document.createElement('input') : document.createElement('textarea');
-          input.name = `${section}-${q.id}`;
-          if (q.type === 'textarea') input.rows = 3;
-          div.appendChild(input);
-        } else if (q.type === 'radio') {
-          q.options.forEach(opt => {
-            const input = document.createElement('input');
-            input.type = 'radio';
-            input.name = `${section}-${q.id}`;
-            input.value = opt.value;
-            const optLabel = document.createElement('label');
-            optLabel.textContent = opt.text;
-            div.appendChild(input);
-            div.appendChild(optLabel);
-          });
-        }
+      if (q.type === 'text' || q.type === 'textarea') {
+  const input = q.type === 'text' ? document.createElement('input') : document.createElement('textarea');
+  input.name = `${section}-${q.id}`;
+  if (q.type === 'textarea') input.rows = 3;
+  input.value = allAnswers[section]?.[q.id] || '';
+  div.appendChild(input);
+} else if (q.type === 'radio') {
+  q.options.forEach(opt => {
+    const input = document.createElement('input');
+    input.type = 'radio';
+    input.name = `${section}-${q.id}`;
+    input.value = opt.value;
+    if (allAnswers[section]?.[q.id] === opt.value) {
+      input.checked = true;
+    }
+    const optLabel = document.createElement('label');
+    optLabel.textContent = opt.text;
+    div.appendChild(input);
+    div.appendChild(optLabel);
+  });
+}
+
 
         questionsContainer.appendChild(div);
       });
@@ -89,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (q.type === 'radio') {
           const selected = document.querySelector(`input[name="${name}"]:checked`);
           allAnswers[section][q.id] = selected?.value || '';
+          localStorage.setItem('covemAnswers', JSON.stringify(allAnswers));
+
         }
       });
     });
@@ -139,8 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function printPdf() {
-    displaySummary();
+  displaySummary();
 
+  setTimeout(() => {
     const clone = summaryContainer.cloneNode(true);
     clone.style.display = 'block';
     document.body.appendChild(clone);
@@ -157,7 +169,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const win = window.open(url);
       win.onload = () => win.print();
     });
-  }
+  }, 200); // petit délai pour que le résumé s'affiche correctement
+}
 
   generateSectionCheckboxes();
 
