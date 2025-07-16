@@ -68,11 +68,79 @@
   </div>
 
   <script>
-    const sectionLabels = {
-      general: "1. Informations Générales",
-      travaux: "2. Travaux à effectuer"
-    };
+  <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Questionnaire COVEM</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+    h3 { margin-top: 20px; }
+    .form-group { margin-bottom: 10px; }
+    textarea, input[type="text"] { width: 100%; }
+    .pdf-actions { margin-top: 20px; display: none; }
+    #summaryContainer { display: none; white-space: pre-wrap; border: 1px solid #ccc; padding: 10px; }
+  </style>
+</head>
+<body>
+  <h1>📝 Questionnaire COVEM</h1>
 
-    const allquestions = {
-      general: [
-        { id: 'siteAccess', lab
+  <div>
+    <label>Nom du projet:</label>
+    <input type="text" id="projectName">
+    <label>Nom du client:</label>
+    <input type="text" id="clientName">
+    <label>Adresse du client:</label>
+    <input type="text" id="clientAddress">
+    <label>Téléphone:</label>
+    <input type="text" id="clientTel">
+    <label>Courriel:</label>
+    <input type="text" id="clientEmail">
+    <button onclick="saveProjectInfo()">💾 Enregistrer les infos générales</button>
+  </div>
+
+  <hr>
+
+  <div>
+    <label>Sélectionnez les sections :</label>
+    <div id="sectionCheckboxes"></div>
+  </div>
+
+  <hr>
+
+  <div id="questionsContainer"></div>
+
+  <button id="saveAllSections">💾 Enregistrer les sections</button>
+  <button id="showSummary">🧾 Voir le résumé</button>
+
+  <div class="pdf-actions">
+    <button id="generatePdfButton">📥 Télécharger PDF</button>
+    <button id="printPdfButton">🖨️ Imprimer PDF</button>
+  </div>
+
+  <div id="summaryContainer">
+    <pre id="summaryContent"></pre>
+  </div>
+
+  <hr>
+
+  <h3>📁 Gestion des projets sauvegardés</h3>
+  <div>
+    <label for="savedProjects">📂 Charger un projet :</label>
+    <select id="savedProjects"></select>
+    <button id="loadProjectButton">Charger</button>
+  </div>
+  <div>
+    <label for="saveProjectName">💾 Nom du projet :</label>
+    <input type="text" id="saveProjectName" placeholder="Nom unique" />
+    <button id="saveProjectButton">Sauvegarder ce projet</button>
+  </div>
+
+  <script src="allquestions.js"></script>
+  <script src="html2pdf.bundle.min.js"></script>
+  <script>
+    // Votre code principal ici, qui utilise allquestions.js
+  </script>
+</head>
+
